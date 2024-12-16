@@ -5,10 +5,14 @@ import { fetchData } from './api'
 import './App.css'
 
 function App() {
+
 const [isDisplayed, setIsDisplayed] = useState(false);
 const [questions, setQuestions] = useState(null);
 const [errorMessagge, setErrorMessage] = useState(null);
 const [loading, setLoading] = useState(true);
+
+
+
 
 useEffect(() => {
 
@@ -16,7 +20,7 @@ useEffect(() => {
   .then(data => setQuestions(data))
   .catch(error => setErrorMessage(error.message))
   .finally(() => setLoading(false));
-
+ 
 },[])
 
   return (

@@ -18,7 +18,6 @@ function markAnswer(index) {
 
 
 
-
     
   useEffect(() => {
 
@@ -33,6 +32,7 @@ function markAnswer(index) {
         correctAnswer: correctAnswer,
         incorrectAnswers: incorrectAnswers,
         allAnswers: [correctAnswer, ...incorrectAnswers], 
+        
       };
       })
         
@@ -49,11 +49,9 @@ function markAnswer(index) {
         { loading
         ? <h2> Loading...</h2>
         : <div className="questions-page">
-      <h1>Questions</h1>
-
       { QandA.map((qa, index) => (
         <div key={index} id="question">
-          <h2>{qa.question}</h2>
+          <h1>{qa.question}</h1>
           <ul id="questions-list">
            
             {qa.allAnswers.map((answer, i) => (
@@ -63,9 +61,13 @@ function markAnswer(index) {
           <div className="line-break"></div>
         </div>
       )) }
-      <p> {result} / 5</p>
+      <footer className='footer-section'>
+      <p className='result'> You scored {result} / 5 correct answers</p>
+      <button>Check answers</button>
+      </footer>
     </div> }
     </>
+
     )
 }
 

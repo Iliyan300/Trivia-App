@@ -15,12 +15,11 @@ const [loading, setLoading] = useState(true);
 
 
 useEffect(() => {
-
+  
   fetchData("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple")
   .then(data => setQuestions(data))
   .catch(error => setErrorMessage(error.message))
-  .finally(() => setLoading(false));
- 
+  .finally(() => setLoading(false))
 },[])
 
   return (

@@ -15,14 +15,39 @@ const [questionsModified, setQuestionsModified] = useState([]);
 
 useEffect(() => {
   
-  fetchData("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple")
-  .then(data => setQuestions(data))
-  .catch(error => setErrorMessage(error.message))
-  .finally(() => setLoading(false))
+ const fetchQuestions = async () => {
+
+  try{
+    setLoading(true);
+    const data = await fetchData("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple");
+    setQuestions(data);
+  } catch {
+    setErrorMessage(error.message);
+  } finally {
+    setLoading(false);
+  }
+ };
+
+ const timeout = setTimeout(() => {
+
+  fetchQuestions();
+
+ },1000);
+
+ return () => clearTimeout(timeout);
+
 
 },[])
 
+function shuffleAnswers(array) {
 
+  const shuffled = [...array];
+  for(let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled
+}
 
 useEffect(() => {
 
@@ -30,13 +55,14 @@ useEffect(() => {
 
     const questions_answers = questions.results.map((question) => {
     const correctAnswer = decodeHtmlEntities(question.correct_answer);
-      const incorrectAnswers = question.incorrect_answers.map((ans) => decodeHtmlEntities(ans))
-    
+    const incorrectAnswers = question.incorrect_answers.map((ans) => decodeHtmlEntities(ans))
+  
+
       return { 
       question: decodeHtmlEntities(question.question), 
       correctAnswer: correctAnswer,
       incorrectAnswers: incorrectAnswers,
-      allAnswers: [correctAnswer, ...incorrectAnswers], 
+      allAnswers: shuffleAnswers([correctAnswer, ...incorrectAnswers]), 
       selectedAnswer: "",
     };
     })
@@ -48,9 +74,9 @@ useEffect(() => {
 
 
 function updateAnswer(answer, currentQuestion) {
-  
-setQuestionsModified(
-questionsModified.map((questionObject) => {
+
+setQuestionsModified( prevState => 
+prevState.map((questionObject) => {
 
  return questionObject.question === currentQuestion 
  ? {...questionObject, selectedAnswer: answer } 
@@ -58,6 +84,7 @@ questionsModified.map((questionObject) => {
 
 })
 )
+
 
 
   

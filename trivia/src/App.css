@@ -21,7 +21,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to right, #293264, #4D5B9E, #4D5B9E, #293264);
+    background: linear-gradient(to right, #041366, #2649f8, #2649f8, #041366);
 }
 
 button {
@@ -111,4 +111,5 @@ footer {
 
     display: block;
 }
+
 

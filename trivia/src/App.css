@@ -7,59 +7,90 @@ font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 
 h1 {
 
-    color:#293264;
+    
     font-weight: 800;
     font-size:1.3rem;
-    color:#ffff;
+    
+}
+
+
+#intro-title {
+
+    font-size:2.5rem;
+  
+}
+
+#intro-info {
+
+    font-size: 1.3rem;
+    color:black;
 }
 
 body {
-    padding:0;
-    margin:0;
-    box-sizing: border-box;
+    
+    
+    background-color: white;
+    color:white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(to right, #041366, #2649f8, #2649f8, #041366);
+    padding:0;
+    margin:0;
+    box-sizing: border-box;
+    
+    
 }
 
 button {
-
+    
     background-color:#23e41196;
-    color:#ffff;
+    color:#293264;
     border-radius: 5px;
     cursor: pointer;
     width: 150px;
     height: 50px;
-    font-size:0.8rem;
+    font-size:1.2rem;
     border:none;
-    
+    font-weight: bold;
 }
 
 .intro-page {
-
+    
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    gap:1rem;
-    min-height: 80vh;
-    margin-left:1.5rem;
-    margin-right: 1.5rem;
+    height: 80vh;
+    
     
 }
 
+.intro-section {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
 
 .questions-page {
-
+    
     display: grid;
     grid-template-rows: repeat(5, 1fr);
-    max-width: 70vw;
-    padding-left:20px;
-    padding-right: 20px;
-    gap:1rem;
-    
+    min-width: 60vw;
+    padding-left:30px;
+    padding-right: 30px;
+   
+}
+
+.questions-section {
+
+
+min-width: 100vw;
+
 }
 
 #questions-list {
@@ -69,7 +100,7 @@ button {
     grid-template-columns: repeat(4, 1fr);
     box-shadow: 4px 4px 10px rgba(4, 0, 24, 0.521);
     border-radius: 10px;
-    
+    background-color: #23e41196;
 }
 
 #questions-list li {
@@ -78,15 +109,15 @@ button {
     border-radius:8px;
     cursor: pointer;
     margin:10px;
-    color:rgb(252, 252, 252);
+    color:#293264;
     font-weight: 700;
-    background-color: #b9b9b921;
+    background-color: white;
     box-shadow: 4px 4px 10px #00000041;
 }
 
 .line-break {
     
-    border:1px solid #b9b9b996;
+    border:1px solid #293264;
     margin-top: 40px;
   
 }
@@ -110,6 +141,62 @@ footer {
 .active {
 
     display: block;
+}
+
+
+
+  
+  .skeleton {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    width: 70vw;
+    height: 100vh;
+    padding-left:20px;
+    padding-right: 20px;
+    gap:1rem;
+  }
+
+
+
+
+.toggleBtn {
+    
+    background-color: white;
+    border:3px solid #293264;
+    border-radius: 30px;
+    padding:15px;
+    margin:20px;
+    font-size:0.9rem;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+
+.toggle-night {
+
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items: flex-end;
+    
+
+}
+
+
+
+.night {
+
+    background-color: #293264;
+    color:white;
+
+}
+
+.day {
+
+    background-color: white;
+    color:#293264;
 }
 
 

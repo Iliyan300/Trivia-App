@@ -1,16 +1,13 @@
 import { useState } from "react";
+import Skeleton from "./Skeleton";
+import ToggleNight from '../components/toggleNight'
 
+function Questions({ loading, questions, updateAnswer, setIsNightToogled, isNightToogled }) {
+const [selectedAnswers, setSelectedAnswers] = useState({});
 
-
-function Questions({ loading, questions, updateAnswer }) {
-
-  const [selectedAnswers, setSelectedAnswers] = useState({});
-console.log(selectedAnswers)
 
 function selectandUpdate(answer, currentQuestion) {
-
 updateAnswer(answer, currentQuestion);
-
 setSelectedAnswers((prevState) => {
 return {...prevState, [currentQuestion]: answer}
 });
@@ -39,11 +36,19 @@ const allAnswers = questions.map((question, questionIndex) => (
     
 
     return(
-      <>
-        { loading
-        ? <h2> Loading...</h2>
-        : <div className="questions-page">
       
+      <section className={`questions-section ${isNightToogled ? "night" : "day"}`}>
+        { loading
+        ? 
+        <div className="skeleton">
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        <Skeleton />
+        </div>
+        : <div className="questions-page">
+          <ToggleNight setIsNightToogled={setIsNightToogled}/>
       {allAnswers}
       
       <footer className='footer-section'>
@@ -51,7 +56,7 @@ const allAnswers = questions.map((question, questionIndex) => (
       <button>Check answers</button>
       </footer>
     </div> }
-    </>
+    </section>
 
     )
 }

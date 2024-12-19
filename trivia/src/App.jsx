@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import IntroPage from '../components/IntroPage'
 import Questions from '../components/Questions'
+
+
 import { decodeHtmlEntities } from '../src/decodeHtml'
 import { fetchData } from './api'
 import './App.css'
@@ -12,6 +14,9 @@ const [questions, setQuestions] = useState(null);
 const [errorMessagge, setErrorMessage] = useState(null);
 const [loading, setLoading] = useState(true);
 const [questionsModified, setQuestionsModified] = useState([]);
+const [isNightToogled, setIsNightToogled] = useState(false);
+
+console.log(isNightToogled);
 
 useEffect(() => {
   
@@ -32,7 +37,7 @@ useEffect(() => {
 
   fetchQuestions();
 
- },1000);
+ },2000);
 
  return () => clearTimeout(timeout);
 
@@ -86,22 +91,26 @@ prevState.map((questionObject) => {
 )
 
 
-
-  
 }
 
 
   return (
+   
     <>
       {isDisplayed 
       
       ? <Questions 
       loading={loading} 
       questions={questionsModified} 
-      updateAnswer={updateAnswer} /> 
+      updateAnswer={updateAnswer} 
+      isNightToogled={isNightToogled}
+      setIsNightToogled={setIsNightToogled} 
+      /> 
       
       : <IntroPage  
-      setIsDisplayed={setIsDisplayed}/>}
+      setIsDisplayed={setIsDisplayed} 
+      isNightToogled={isNightToogled}
+      setIsNightToogled={setIsNightToogled} />}
     </>
   )
 }

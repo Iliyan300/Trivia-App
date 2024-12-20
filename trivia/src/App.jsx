@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import IntroPage from '../components/IntroPage'
 import Questions from '../components/Questions'
-
-
 import { decodeHtmlEntities } from '../src/decodeHtml'
 import { fetchData } from './api'
 import './App.css'
@@ -14,9 +12,9 @@ const [questions, setQuestions] = useState(null);
 const [errorMessagge, setErrorMessage] = useState(null);
 const [loading, setLoading] = useState(true);
 const [questionsModified, setQuestionsModified] = useState([]);
-const [isNightToogled, setIsNightToogled] = useState(false);
+const [isDarkToogled, setIsDarkToogled] = useState(false);
 
-console.log(isNightToogled);
+
 
 useEffect(() => {
   
@@ -96,22 +94,24 @@ prevState.map((questionObject) => {
 
   return (
    
-    <>
+    <section className={`main-wrapper ${isDarkToogled ? "nightTheme" : "dayTheme"}`}>
       {isDisplayed 
       
       ? <Questions 
       loading={loading} 
       questions={questionsModified} 
       updateAnswer={updateAnswer} 
-      isNightToogled={isNightToogled}
-      setIsNightToogled={setIsNightToogled} 
+      isDarkToogled={isDarkToogled}
+      setDarkMode={setIsDarkToogled}
+      
       /> 
       
       : <IntroPage  
+      isDarkToogled={isDarkToogled}
+      setDarkMode={setIsDarkToogled}
       setIsDisplayed={setIsDisplayed} 
-      isNightToogled={isNightToogled}
-      setIsNightToogled={setIsNightToogled} />}
-    </>
+      />}
+   </section>
   )
 }
 

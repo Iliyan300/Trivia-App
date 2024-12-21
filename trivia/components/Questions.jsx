@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Skeleton from "./Skeleton";
-
+import { darkThemeIcon, dayThemeIcon } from "../public/darkThemeIcons"
 
 function Questions({ loading, questions, updateAnswer, setDarkMode, isDarkToogled }) {
 const [selectedAnswers, setSelectedAnswers] = useState({});
@@ -65,7 +65,9 @@ const allAnswers = questions.map((question, questionIndex) => (
         </div>
         : 
         <div className="questions">
-          <button style={isDarkThemeBtns} onClick={() => setDarkMode(prev => !prev)}> {isDarkToogled ? "Day" : "Night"} </button> 
+          <div className="dark-mode-btn">
+          <button style={isDarkThemeBtns} onClick={() => setDarkMode(prev => !prev)}> {isDarkToogled ? dayThemeIcon : darkThemeIcon} </button> 
+          </div>
        {allAnswers}
       <footer className='footer-section'>
       <p className='result'> You scored 0 / 5 correct answers</p>

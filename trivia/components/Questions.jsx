@@ -2,8 +2,9 @@ import { useState } from "react";
 import Skeleton from "./Skeleton";
 import { darkThemeIcon, dayThemeIcon } from "../public/darkThemeIcons"
 
-function Questions({ loading, questions, updateAnswer, setDarkMode, isDarkToogled }) {
+function Questions({ errorMessage, loading, questions, updateAnswer, setDarkMode, isDarkToogled }) {
 const [selectedAnswers, setSelectedAnswers] = useState({});
+const [finalResult, setFinalResult] = useState(0);
 
 const isDarkTheme = {
   color: isDarkToogled ? "#fff" : "#293264",
@@ -17,7 +18,7 @@ const isDarkThemeBtns = {
 
 const isDarkThemeText = {
 
-  color: isDarkToogled ? "#485ccf" : "293264",
+  color: isDarkToogled ? "#a6b3ee" : "#293264",
 }
 
 function selectandUpdate(answer, currentQuestion) {
@@ -28,11 +29,30 @@ return {...prevState, [currentQuestion]: answer}
 }
 
 
+function checkAnswers() {
+
+  const selectedAnswers = questions.map((answers) => answers.selectedAnswer);
+  const correctAnswered = questions.filter((answers) =>  answers.correctAnswer === answers.selectedAnswer);
+  setFinalResult(correctAnswered.length);
+
+  const isAllSelected = selectedAnswers.every((answer) => answer.length > 0 )
+  
+  if(isAllSelected) {
+    let result = document.querySelector(".result");
+    result.classList.add("active");
+  } else {
+console.log("Please select all answers")
+  }
+  
+ 
+}
+
+
 const allAnswers = questions.map((question, questionIndex) => (
   
-  <div  key={questionIndex} id="question">
+  <div key={questionIndex} id="question">
     <h1 style={isDarkThemeText}>{question.question}</h1>
-    <ul style={isDarkTheme} id="questions-list">
+    <ul style={isDarkTheme} className="questions-list">
 
       { question.allAnswers.map((answer, answerIndex) => (
         <li 
@@ -54,26 +74,31 @@ const allAnswers = questions.map((question, questionIndex) => (
     return(
       
       <section className="questions-section">
-        { loading
+        { loading 
         ? 
         <div className="skeleton">
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
-        <Skeleton />
+        <Skeleton isDarkToogled={isDarkToogled} />
+        <Skeleton isDarkToogled={isDarkToogled} />
+        <Skeleton isDarkToogled={isDarkToogled} />
+        <Skeleton isDarkToogled={isDarkToogled} />
+        <Skeleton isDarkToogled={isDarkToogled} />
         </div>
         : 
+        
         <div className="questions">
           <div className="dark-mode-btn">
           <button style={isDarkThemeBtns} onClick={() => setDarkMode(prev => !prev)}> {isDarkToogled ? dayThemeIcon : darkThemeIcon} </button> 
           </div>
-       {allAnswers}
-      <footer className='footer-section'>
-      <p className='result'> You scored 0 / 5 correct answers</p>
-      <button style={isDarkThemeBtns}>Check answers</button>
+         {errorMessage ? <h3 id="error">{errorMessage}</h3> : allAnswers}
+          <footer className='footer-section'>
+      <p className='result'> You scored {finalResult} / {questions.length} correct answers</p>
+      <button style={isDarkThemeBtns} onClick={() => checkAnswers()}>Check answers</button>
+     
+
       </footer>
-    </div> }
+    </div>
+        
+     }
     </section>
 
     )

@@ -9,10 +9,11 @@ function App() {
 
 const [isDisplayed, setIsDisplayed] = useState(false);
 const [questions, setQuestions] = useState(null);
-const [errorMessagge, setErrorMessage] = useState(null);
+const [errorMessage, setErrorMessage] = useState(null);
 const [loading, setLoading] = useState(true);
 const [questionsModified, setQuestionsModified] = useState([]);
 const [isDarkToogled, setIsDarkToogled] = useState(false);
+
 
 
 
@@ -24,7 +25,7 @@ useEffect(() => {
     setLoading(true);
     const data = await fetchData("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple");
     setQuestions(data);
-  } catch {
+  } catch(error) {
     setErrorMessage(error.message);
   } finally {
     setLoading(false);
@@ -35,7 +36,7 @@ useEffect(() => {
 
   fetchQuestions();
 
- },2000);
+ }, 2000);
 
  return () => clearTimeout(timeout);
 
@@ -89,6 +90,9 @@ prevState.map((questionObject) => {
 )
 
 
+
+
+
 }
 
 
@@ -103,7 +107,7 @@ prevState.map((questionObject) => {
       updateAnswer={updateAnswer} 
       isDarkToogled={isDarkToogled}
       setDarkMode={setIsDarkToogled}
-      
+      errorMessage={errorMessage}
       /> 
       
       : <IntroPage  

@@ -64,6 +64,8 @@ button {
     flex-direction: column;
     align-items: flex-end;
     min-width: 80vw;
+    
+    
 }
 
 .dark-mode-btn button {
@@ -94,6 +96,7 @@ button {
 .intro-page {
 
     min-height: 60vh;
+    
 }
 
 
@@ -107,6 +110,7 @@ button {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    
 }
 
 
@@ -120,13 +124,13 @@ button {
     padding-right: 1.5rem;
     padding-top:1.5rem;
     min-width: 50vw;
-
+    
 }
 
 
 
 
-#questions-list {
+.questions-list {
    
     list-style: none;
     display: grid;
@@ -136,18 +140,20 @@ button {
     background-color: #71c969c7;
     padding-left:10px;
     padding-right: 10px;
+    animation: skeletonAnimation 0.5s forwards;
+    
 }
 
-#questions-list li {
+.questions-list li {
 
     padding:0.3rem;
     border-radius:6px;
     cursor: pointer;
     margin:10px;
-    color:#293264;
     font-weight: 700;
-    background-color: #fff;
     box-shadow: 4px 4px 10px #00000041;
+    background-color: #fff;
+    
 }
 
 
@@ -156,7 +162,6 @@ button {
     
     border:1px solid #293264;
     margin-top: 40px;
-  
 }
 
 
@@ -185,39 +190,103 @@ footer {
 }
 
   
-  .skeleton {
+.skeleton {
     display: grid;
     grid-template-rows: repeat(5, 1fr);
+    padding-top:2rem;
    min-width: 80vw;
-   min-height: 100vh;
+   min-height: 70vh;
     padding-left:20px;
     padding-right: 20px;
-   
+    
   }
 
+  .skeleton-text {
 
- 
+    background-color:transparent;
+    height: 40px;
+    border-radius: 5px;
+  }
 
+.darkSkeleton {
+
+    background-color: #1a1624;
+
+}
+
+.darkSkeleton li {
+
+    background-color: #a6b3ee;
+    border: 2px solid black;
+    
+}
+
+
+
+.questions-list .darkThemeAnswer {
+
+    background-color: transparent;
+    border:1px solid black;
+    color: black;
+}
+
+#error {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+}
+
+
+/* ANIMATIONS */ 
+
+@keyframes darkModeToggle {
+    0% {
+        background-color: #fff;
+        color:#293264;
+    }
+    100% {
+        background-color: #1a1624;
+        color:#fff;
+    }
+}
+
+@keyframes lightModeToggle {
+    0% {
+        background-color: #1a1624;
+        color:#fff;
+    }
+    100% {
+        background-color: #fff;
+        color:#293264;
+    }
+}
 
 .nightTheme {
 
-    background-color: #1a1624;
-    color:#fff;
+    animation: darkModeToggle 0.5s forwards;
 }
 
 .dayTheme {
 
-    background-color: #fff;
-    color:#293264;
+    
+    animation: lightModeToggle 0.5s forwards;
 }
 
 
+@keyframes skeletonAnimation {
 
-#questions-list .darkThemeAnswer {
+    0% {
+        opacity:0;
+        
+       
+    }
 
-    background-color: transparent;
-    border:1px solid #100e29;
-    color: #100e29;
+    100% {
+        
+        opacity: 1;
+        
+        
+    }
 }
-
 

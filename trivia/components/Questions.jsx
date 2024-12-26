@@ -5,6 +5,8 @@ import { darkThemeIcon, dayThemeIcon } from "../public/darkThemeIcons"
 function Questions({ errorMessage, loading, questions, updateAnswer, setDarkMode, isDarkToogled }) {
 const [selectedAnswers, setSelectedAnswers] = useState({});
 const [finalResult, setFinalResult] = useState(0);
+const [isAllSelected, setIsAllSelected] = useState(false);
+const [isPopUp, setIsPopUp] = useState(false);
 
 const isDarkTheme = {
   color: isDarkToogled ? "#fff" : "#293264",
@@ -35,15 +37,15 @@ function checkAnswers() {
   const correctAnswered = questions.filter((answers) =>  answers.correctAnswer === answers.selectedAnswer);
   setFinalResult(correctAnswered.length);
 
-  const isAllSelected = selectedAnswers.every((answer) => answer.length > 0 )
-  
+  const isAllSelected = selectedAnswers.every((answer) => answer.length > 0 );
+  setIsAllSelected(isAllSelected);
+
   if(isAllSelected) {
-    let result = document.querySelector(".result");
-    result.classList.add("active");
+    setIsPopUp(false);
   } else {
-console.log("Please select all answers")
+    setIsPopUp(true);
   }
-  
+ 
  
 }
 
@@ -91,13 +93,14 @@ const allAnswers = questions.map((question, questionIndex) => (
           </div>
          {errorMessage ? <h3 id="error">{errorMessage}</h3> : allAnswers}
           <footer className='footer-section'>
-      <p className='result'> You scored {finalResult} / {questions.length} correct answers</p>
+      {isAllSelected && <p className="result"> You scored {finalResult} / {questions.length} correct answers</p>}
+      {isPopUp && <p id="alert">Please answer all questions</p>}
       <button style={isDarkThemeBtns} onClick={() => checkAnswers()}>Check answers</button>
+      
      
-
       </footer>
-    </div>
-        
+      
+    </div>  
      }
     </section>
 

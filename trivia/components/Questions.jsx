@@ -6,28 +6,31 @@ function Questions({ errorMessage, loading, questions, updateAnswer, setDarkMode
 const [selectedAnswers, setSelectedAnswers] = useState({});
 const [finalResult, setFinalResult] = useState(0);
 const [isAllSelected, setIsAllSelected] = useState(false);
-const [isPopUp, setIsPopUp] = useState(false);
+const [isNotAnswered, setisNotAnswered] = useState(false);
+
+
+
 
 const isDarkTheme = {
   color: isDarkToogled ? "#fff" : "#293264",
   backgroundColor: isDarkToogled ? "#a6b3ee96" : "",
 }
-
 const isDarkThemeBtns = {
   color: isDarkToogled ? "#fff" : "",
   backgroundColor: isDarkToogled ? "#a6b3ee98" : "",
 }
-
 const isDarkThemeText = {
 
   color: isDarkToogled ? "#a6b3ee" : "#293264",
 }
 
 function selectandUpdate(answer, currentQuestion) {
+if(!isAllSelected) {
 updateAnswer(answer, currentQuestion);
 setSelectedAnswers((prevState) => {
 return {...prevState, [currentQuestion]: answer}
 });
+}
 }
 
 
@@ -41,11 +44,15 @@ function checkAnswers() {
   setIsAllSelected(isAllSelected);
 
   if(isAllSelected) {
-    setIsPopUp(false);
+    setisNotAnswered(false);
+    let correctAnswer = document.getElementsByClassName("correct");
+    let incorrectAnswer = document.getElementsByClassName("incorrect");
+    [...incorrectAnswer].forEach((element) => element.style.border = "2px solid rgb(236, 79, 17)");
+    [...correctAnswer].forEach((element) => element.style.border = "2px solid #62ec11");
+    
   } else {
-    setIsPopUp(true);
+    setisNotAnswered(true);
   }
- 
  
 }
 
@@ -59,7 +66,9 @@ const allAnswers = questions.map((question, questionIndex) => (
       { question.allAnswers.map((answer, answerIndex) => (
         <li 
         key={answerIndex} 
-        className={`answer ${isDarkToogled ? "darkThemeAnswer" : ""}`}
+        className={`answer 
+        ${isDarkToogled ? "darkThemeAnswer" : ""} 
+        ${question.correctAnswer === answer ? "correct" : "incorrect"}`} 
         style={{backgroundColor: selectedAnswers[question.question] === answer ? "#6c5dc5" : "", 
         color: selectedAnswers[question.question] === answer ? "#fff" : "" }}
         onClick={() => selectandUpdate(answer, question.question)}>
@@ -94,8 +103,8 @@ const allAnswers = questions.map((question, questionIndex) => (
          {errorMessage ? <h3 id="error">{errorMessage}</h3> : allAnswers}
           <footer className='footer-section'>
       {isAllSelected && <p className="result"> You scored {finalResult} / {questions.length} correct answers</p>}
-      {isPopUp && <p id="alert">Please answer all questions</p>}
-      <button style={isDarkThemeBtns} onClick={() => checkAnswers()}>Check answers</button>
+      {isNotAnswered && <p id="alert">Please answer all questions</p>}
+      {isAllSelected ? <button style={isDarkThemeBtns}>Play Again</button> :<button style={isDarkThemeBtns} onClick={() => checkAnswers()}>Check answers</button>}
       
      
       </footer>

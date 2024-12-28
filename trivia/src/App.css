@@ -217,10 +217,13 @@ footer {
 
 .questions-list .darkThemeAnswer {
 
-    background-color: transparent;
+    background-color:transparent;
     border:1px solid black;
     color: black;
 }
+
+
+
 
 #error {
     
@@ -243,8 +246,9 @@ border:1px solid orange;
 border-radius: 10px 10px 10px 0px;
 padding:8px;
 
-
 }
+
+
 
 /* ANIMATIONS */ 
 

@@ -1,6 +1,6 @@
 import { darkThemeIcon, dayThemeIcon } from "../public/darkThemeIcons"
 
-function IntroPage({ setIsDisplayed, setDarkMode, isDarkToogled }) {
+function IntroPage({ setDarkMode, isDarkToogled, handlePlayGame }) {
 
     const isDarkTheme = {
         color: isDarkToogled ? "#fff" : "#293264",
@@ -22,7 +22,7 @@ return(
     <div className="intro-page" >
         <h1 id="intro-title" style={isDarkTheme} >Quizzical</h1>
         <p id="intro-info" style={isDarkTheme}>Click on the start button to test your knowledge!</p>
-        <button style={isDarkThemeBtns} onClick={() => setIsDisplayed(prev => !prev)}>Start Quiz</button>
+        <button style={isDarkThemeBtns} onClick={() => handlePlayGame()}>Start Quiz</button>
         
     </div>
     </section>

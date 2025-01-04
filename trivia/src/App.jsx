@@ -13,14 +13,13 @@ const [errorMessage, setErrorMessage] = useState(null);
 const [loading, setLoading] = useState(true);
 const [questionsModified, setQuestionsModified] = useState([]);
 const [isDarkToogled, setIsDarkToogled] = useState(false);
+const [reloadKey, setReloadKey] = useState(0);
+const [finalResult, setFinalResult] = useState(0);
 
+console.log(reloadKey)
 
-
-
-useEffect(() => {
-  
  const fetchQuestions = async () => {
-
+  
   try{
     setLoading(true);
     const data = await fetchData("https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple");
@@ -30,18 +29,37 @@ useEffect(() => {
   } finally {
     setLoading(false);
   }
+
  };
 
- const timeout = setTimeout(() => {
+ useEffect(() => {
+  if(isDisplayed) {
+    console.log("fetching activated")
+  const timeout = setTimeout(() => {
+   fetchQuestions();
+}, 2000);
+  
+return () => clearTimeout(timeout);
+  } else {
+    console.log("fetching not activated")
+  }
+ },[reloadKey])
 
-  fetchQuestions();
-
- }, 2000);
-
- return () => clearTimeout(timeout);
 
 
-},[])
+function handlePlayGame() {
+  
+  setIsDisplayed(prevState => !prevState);
+  setReloadKey((prevState => prevState + 1));
+
+}
+
+function handleRestartGame() {
+  setLoading(true);
+  setFinalResult(0);
+  setQuestionsModified([]);
+  setReloadKey((prevState => prevState + 1));
+}
 
 function shuffleAnswers(array) {
 
@@ -58,17 +76,16 @@ useEffect(() => {
   if(questions?.results?.length > 0) {
 
     const questions_answers = questions.results.map((question) => {
+    
     const correctAnswer = decodeHtmlEntities(question.correct_answer);
     const incorrectAnswers = question.incorrect_answers.map((ans) => decodeHtmlEntities(ans))
-  
-
       return { 
       question: decodeHtmlEntities(question.question), 
       correctAnswer: correctAnswer,
       incorrectAnswers: incorrectAnswers,
       allAnswers: shuffleAnswers([correctAnswer, ...incorrectAnswers]), 
       selectedAnswer: "",
-    };
+      };
     })
       
     setQuestionsModified(questions_answers)
@@ -88,11 +105,6 @@ prevState.map((questionObject) => {
 
 })
 )
-
-
-
-
-
 }
 
 
@@ -108,12 +120,15 @@ prevState.map((questionObject) => {
       isDarkToogled={isDarkToogled}
       setDarkMode={setIsDarkToogled}
       errorMessage={errorMessage}
+      handleRestartGame={handleRestartGame}
+      finalResult={finalResult}
+      setFinalResult={setFinalResult}
       /> 
       
       : <IntroPage  
+     handlePlayGame={handlePlayGame}
       isDarkToogled={isDarkToogled}
       setDarkMode={setIsDarkToogled}
-      setIsDisplayed={setIsDisplayed} 
       />}
    </section>
   )

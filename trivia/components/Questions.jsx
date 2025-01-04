@@ -2,13 +2,10 @@ import { useState } from "react";
 import Skeleton from "./Skeleton";
 import { darkThemeIcon, dayThemeIcon } from "../public/darkThemeIcons"
 
-function Questions({ errorMessage, loading, questions, updateAnswer, setDarkMode, isDarkToogled }) {
+function Questions({ errorMessage, loading, questions, updateAnswer, setDarkMode, isDarkToogled, handleRestartGame, finalResult, setFinalResult }) {
 const [selectedAnswers, setSelectedAnswers] = useState({});
-const [finalResult, setFinalResult] = useState(0);
 const [isAllSelected, setIsAllSelected] = useState(false);
 const [isNotAnswered, setisNotAnswered] = useState(false);
-
-
 
 
 const isDarkTheme = {
@@ -30,9 +27,8 @@ updateAnswer(answer, currentQuestion);
 setSelectedAnswers((prevState) => {
 return {...prevState, [currentQuestion]: answer}
 });
+ }
 }
-}
-
 
 function checkAnswers() {
 
@@ -104,7 +100,7 @@ const allAnswers = questions.map((question, questionIndex) => (
           <footer className='footer-section'>
       {isAllSelected && <p className="result"> You scored {finalResult} / {questions.length} correct answers</p>}
       {isNotAnswered && <p id="alert">Please answer all questions</p>}
-      {isAllSelected ? <button style={isDarkThemeBtns}>Play Again</button> :<button style={isDarkThemeBtns} onClick={() => checkAnswers()}>Check answers</button>}
+      {isAllSelected ? <button style={isDarkThemeBtns} onClick={() => handleRestartGame()}>Play Again</button> :<button style={isDarkThemeBtns} onClick={() => checkAnswers()}>Check answers</button>}
       
      
       </footer>

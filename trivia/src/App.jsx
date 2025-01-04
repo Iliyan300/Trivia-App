@@ -15,6 +15,8 @@ const [questionsModified, setQuestionsModified] = useState([]);
 const [isDarkToogled, setIsDarkToogled] = useState(false);
 const [reloadKey, setReloadKey] = useState(0);
 const [finalResult, setFinalResult] = useState(0);
+const [isAllSelected, setIsAllSelected] = useState(false);
+const [selectedAnswers, setSelectedAnswers] = useState({});
 
 console.log(reloadKey)
 
@@ -58,6 +60,8 @@ function handleRestartGame() {
   setLoading(true);
   setFinalResult(0);
   setQuestionsModified([]);
+  setIsAllSelected(false);
+  setSelectedAnswers({});
   setReloadKey((prevState => prevState + 1));
 }
 
@@ -123,6 +127,10 @@ prevState.map((questionObject) => {
       handleRestartGame={handleRestartGame}
       finalResult={finalResult}
       setFinalResult={setFinalResult}
+      isAllSelected={isAllSelected}
+      setIsAllSelected={setIsAllSelected}
+      selectedAnswers={selectedAnswers}
+      setSelectedAnswers={setSelectedAnswers}
       /> 
       
       : <IntroPage  

@@ -2,9 +2,8 @@ import { useState } from "react";
 import Skeleton from "./Skeleton";
 import { darkThemeIcon, dayThemeIcon } from "../public/darkThemeIcons"
 
-function Questions({ errorMessage, loading, questions, updateAnswer, setDarkMode, isDarkToogled, handleRestartGame, finalResult, setFinalResult }) {
-const [selectedAnswers, setSelectedAnswers] = useState({});
-const [isAllSelected, setIsAllSelected] = useState(false);
+function Questions({ errorMessage, loading, questions, updateAnswer, setDarkMode, isDarkToogled, handleRestartGame, finalResult, setFinalResult, isAllSelected, setIsAllSelected, selectedAnswers, setSelectedAnswers }) {
+
 const [isNotAnswered, setisNotAnswered] = useState(false);
 
 

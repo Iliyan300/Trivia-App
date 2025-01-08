@@ -20,6 +20,8 @@ const isDarkThemeText = {
   color: isDarkToogled ? "#a6b3ee" : "#293264",
 }
 
+
+
 function selectandUpdate(answer, currentQuestion) {
 if(!isAllSelected) {
 updateAnswer(answer, currentQuestion);
@@ -40,11 +42,22 @@ function checkAnswers() {
 
   if(isAllSelected) {
     setisNotAnswered(false);
-    let correctAnswer = document.getElementsByClassName("correct");
-    let incorrectAnswer = document.getElementsByClassName("incorrect");
-    [...incorrectAnswer].forEach((element) => element.style.border = "2px solid rgb(236, 79, 17)");
-    [...correctAnswer].forEach((element) => element.style.border = "2px solid #62ec11");
+    let correctAnswer = document.querySelectorAll(".correct");
+    let correctAnswered = document.getElementsByClassName("correct-answered");
+    let incorrectAnswered = document.getElementsByClassName("incorrect-answered");
+    let correctItems = document.querySelectorAll(".correct-answered li.incorrect");
+    let incorrectItems = document.querySelectorAll(".incorrect-answered li.incorrect");
+    let incorrectSelected = document.querySelectorAll(".incorrect.selected");
+       
+    [...correctAnswered].forEach((element) => element.style.backgroundColor = "#3cfa3c");
+   [...incorrectAnswered].forEach((element) => element.style.backgroundColor = "grey");
+    correctAnswer.forEach((element) => element.style.backgroundColor = "#19e52a");
+    correctItems.forEach((li) => li.style.border = "none");
+    incorrectItems.forEach((li) => li.style.border = "none");
+    incorrectSelected.forEach((li) => li.style.border = "2px solid red");
     
+   
+
   } else {
     setisNotAnswered(true);
   }
@@ -56,21 +69,19 @@ const allAnswers = questions.map((question, questionIndex) => (
   
   <div key={questionIndex} id="question">
     <h1 style={isDarkThemeText}>{question.question}</h1>
-    <ul style={isDarkTheme} className="questions-list">
+    <ul style={isDarkTheme} className={`questions-list ${question.selectedAnswer === question.correctAnswer ? "correct-answered" : "incorrect-answered"}`}>
 
       { question.allAnswers.map((answer, answerIndex) => (
-        <li 
-        key={answerIndex} 
+        <li key={answerIndex} 
         className={`answer 
         ${isDarkToogled ? "darkThemeAnswer" : ""} 
-        ${question.correctAnswer === answer ? "correct" : "incorrect"}`} 
-        style={{backgroundColor: selectedAnswers[question.question] === answer ? "#6c5dc5" : "", 
-        color: selectedAnswers[question.question] === answer ? "#fff" : "" }}
+        ${question.correctAnswer === answer ? "correct" : "incorrect"}
+        ${selectedAnswers[question.question] === answer ? "selected" : ""}`}
+        style={{backgroundColor: selectedAnswers[question.question] === answer ? "#6c5dc5" : ""}}
         onClick={() => selectandUpdate(answer, question.question)}>
         {answer}
       </li>
       )) }
-
     </ul>
     <div className="line-break"></div>
   </div>
@@ -81,6 +92,7 @@ const allAnswers = questions.map((question, questionIndex) => (
       
       <section className="questions-section">
         { loading 
+        
         ? 
         <div className="skeleton">
         <Skeleton isDarkToogled={isDarkToogled} />
@@ -89,21 +101,28 @@ const allAnswers = questions.map((question, questionIndex) => (
         <Skeleton isDarkToogled={isDarkToogled} />
         <Skeleton isDarkToogled={isDarkToogled} />
         </div>
-        : 
         
+        : 
+
         <div className="questions">
           <div className="dark-mode-btn">
-          <button style={isDarkThemeBtns} onClick={() => setDarkMode(prev => !prev)}> {isDarkToogled ? dayThemeIcon : darkThemeIcon} </button> 
+          <button id="dark-toogle-btn" style={isDarkThemeBtns} onClick={() => setDarkMode(prev => !prev)}> {isDarkToogled ? dayThemeIcon : darkThemeIcon} </button>
           </div>
-         {errorMessage ? <h3 id="error">{errorMessage}</h3> : allAnswers}
+          <div className="questions-type">
+          <h1 style={isDarkThemeText}>Type: General Knowledge</h1>
+          <h1 style={isDarkThemeText}>Level: Easy</h1> 
+          </div>
+         {errorMessage 
+         ? <h3 id="error">{errorMessage}</h3> 
+         : allAnswers}
+          
           <footer className='footer-section'>
-      {isAllSelected && <p className="result"> You scored {finalResult} / {questions.length} correct answers</p>}
+      {isAllSelected && <p id="result"> You scored {finalResult} / {questions.length} correct answers</p>}
       {isNotAnswered && <p id="alert">Please answer all questions</p>}
-      {isAllSelected ? <button style={isDarkThemeBtns} onClick={() => handleRestartGame()}>Play Again</button> :<button style={isDarkThemeBtns} onClick={() => checkAnswers()}>Check answers</button>}
-      
-     
+      {isAllSelected 
+      ? <button id="play-again-btn" style={isDarkThemeBtns} onClick={() => handleRestartGame()}>Play Again</button> 
+      : <button id="check-answers-btn" style={isDarkThemeBtns} onClick={() => checkAnswers()}>Check answers</button>}
       </footer>
-      
     </div>  
      }
     </section>

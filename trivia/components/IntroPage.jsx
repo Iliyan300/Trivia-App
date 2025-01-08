@@ -22,7 +22,7 @@ return(
     <div className="intro-page" >
         <h1 id="intro-title" style={isDarkTheme} >Quizzical</h1>
         <p id="intro-info" style={isDarkTheme}>Click on the start button to test your knowledge!</p>
-        <button style={isDarkThemeBtns} onClick={() => handlePlayGame()}>Start Quiz</button>
+        <button id="start-btn" style={isDarkThemeBtns} onClick={() => handlePlayGame()}>Start Quiz</button>
         
     </div>
     </section>

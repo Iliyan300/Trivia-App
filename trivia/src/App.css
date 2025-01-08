@@ -45,16 +45,21 @@ body {
 
 button {
     
-    background-color:#71c969c7;
+    background-color:rgba(60, 250, 60, 0.699);
     color:#293264;
     border-radius: 5px;
     cursor: pointer;
     width: 150px;
     height: 50px;
     font-size:1.2rem;
-    border:none;
     font-weight: bold;
 }
+
+#check-answers-btn, #play-again-btn, #start-btn {
+
+    border:none;
+}
+
 
 
 .dark-mode-btn {
@@ -74,6 +79,7 @@ button {
     background-color: #293264;
     color: #fff;
     width: 100px;
+    border:none;
 }
 
 
@@ -130,6 +136,7 @@ button {
 
 
 
+
 .questions-list {
    
     list-style: none;
@@ -137,7 +144,7 @@ button {
     grid-template-columns: repeat(4, 1fr);
     box-shadow: 4px 4px 10px rgba(4, 0, 24, 0.521);
     border-radius: 10px;
-    background-color: #71c969c7;
+    background-color: #3cfa3cb2;
     padding-left:10px;
     padding-right: 10px;
     animation: skeletonAnimation 0.5s forwards;
@@ -153,8 +160,18 @@ button {
     font-weight: 700;
     box-shadow: 4px 4px 10px #00000041;
     background-color: #fff;
-    
+    color:#121c55;
 }
+
+.questions-type {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+}
+
 
 
 
@@ -174,6 +191,8 @@ footer {
     gap:20px;
     min-height: 100px;
 }
+
+
 
 
 
@@ -233,7 +252,7 @@ footer {
 
 }
 
-.result {
+#result {
     animation: skeletonAnimation 0.5s forwards;
 }
 

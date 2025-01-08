@@ -18,8 +18,6 @@ const [finalResult, setFinalResult] = useState(0);
 const [isAllSelected, setIsAllSelected] = useState(false);
 const [selectedAnswers, setSelectedAnswers] = useState({});
 
-console.log(reloadKey)
-
  const fetchQuestions = async () => {
   
   try{
@@ -31,7 +29,7 @@ console.log(reloadKey)
   } finally {
     setLoading(false);
   }
-
+  console.log("fetching done")
  };
 
  useEffect(() => {

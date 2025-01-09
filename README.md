@@ -1,6 +1,6 @@
 Trivia App - Solo Project from Scrimba course.
 
--Build with React library
+-Build from scratch with React library
 - Added my own flavor with CSS
 
 I learned a lot of the React ecosystem while building this project.

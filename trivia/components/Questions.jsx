@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Skeleton from "./Skeleton";
-import { darkThemeIcon, dayThemeIcon } from "./darkThemeIcons"
+import { darkThemeIcon, dayThemeIcon } from "./darkThemeIcons.jsx"
 
 function Questions({ errorMessage, loading, questions, updateAnswer, setDarkMode, isDarkToogled, handleRestartGame, finalResult, setFinalResult, isAllSelected, setIsAllSelected, selectedAnswers, setSelectedAnswers }) {
 

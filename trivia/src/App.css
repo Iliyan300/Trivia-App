@@ -39,6 +39,7 @@ body {
     margin:0;
     box-sizing: border-box;
     min-height: 100vh;
+    
 }
 
 
@@ -117,6 +118,7 @@ button {
     align-items: center;
     min-height: 100vh;
     
+    
 }
 
 
@@ -129,7 +131,8 @@ button {
     padding-left:1.5rem;
     padding-right: 1.5rem;
     padding-top:1.5rem;
-    min-width: 50vw;
+    min-width: 80vw;
+ 
     
 }
 
@@ -161,6 +164,7 @@ button {
     box-shadow: 4px 4px 10px #00000041;
     background-color: #fff;
     color:#121c55;
+    
 }
 
 .questions-type {
@@ -321,3 +325,47 @@ padding:8px;
     }
 }
 
+/* RESPONSIVE DESIGN FOR MOBILE */
+
+
+@media (max-width: 768px) {
+    .questions {
+        grid-template-rows: repeat(5, auto);
+        padding-left: 1rem;
+        padding-right: 1rem;
+        min-width: 80vw;
+    }
+
+    .questions-list {
+        grid-template-columns: repeat(2, 1fr);
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .questions-list li {
+        padding: 0.5rem;
+        margin: 8px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .questions {
+        grid-template-rows: repeat(5, auto);
+        padding-left: 1rem;
+        padding-right: 1rem;
+        min-width: 80vw;
+    }
+
+    .questions-list {
+        grid-template-rows: 2fr;
+        padding-left: 2px;
+        padding-right: 2px;
+    }
+
+    .questions-list li {
+        padding: 0.5rem;
+        margin: 8px;
+        font-size: 1rem;
+    }
+}

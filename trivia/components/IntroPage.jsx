@@ -1,4 +1,4 @@
-import { darkThemeIcon, dayThemeIcon } from "./darkThemeIcons"
+import { darkThemeIcon, dayThemeIcon } from "./darkThemeIcons.jsx"
 
 function IntroPage({ setDarkMode, isDarkToogled, handlePlayGame }) {
 

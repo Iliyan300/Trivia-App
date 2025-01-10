@@ -1,3 +1,3 @@
 
-export const darkThemeIcon = (<img  src="icons/moon-stars.svg"></img>)
-export const dayThemeIcon = (<img   src="icons/brightness-alt-high.svg"></img>)
+export const darkThemeIcon = (<img  src="/moon-stars.svg"></img>)
+export const dayThemeIcon = (<img   src="/brightness-alt-high.svg"></img>)
